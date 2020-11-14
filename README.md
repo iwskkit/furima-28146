@@ -41,7 +41,7 @@ Things you may want to cover:
 ### Association
 
 - has_many :items
-- 
+- has_one :purchasing_management
 - 
 
 ## itemsテーブル
@@ -49,14 +49,18 @@ Things you may want to cover:
 | Column | Type   | Options     |
 | ------ | ------ | ----------- |
 | name   | string | null: false |
-| image  | text | null: false |
 | detail | text | null: false |
 | price  | integer| null: false |
+| status | string | null: false |
+| fee_burden | boolean | null: false|
+| area | integer | null: false|
+| handling_time | integer | null: false|
+| category | integer | null: false|
+
 
 ### Association
 
-- belongs_to :users
-- has_one :adresses
+- belong_to :users
   has_one :purchasing_management
 
 
@@ -64,15 +68,14 @@ Things you may want to cover:
 
 | Column | Type   | Options     |
 | ------ | ------ | ----------- |
-| postal_code| integer| null: false |
-| prefecture   | string | null: false |
+| postal_code| string| null: false |
+| prefecture   | integer | null: false |
 | municipality | string | null: false |
 | house_number | string | null: false |
 | buliding_name| string |
 | phone_number | string | null: false |
 
 ### Association
-  has_one :items
   has_one :purchasing_management
 
 ## purchasing_management テーブル
