@@ -30,18 +30,19 @@ Things you may want to cover:
 | Column   | Type   | Options     |
 | -------- | ------ | ----------- |
 | nickname | string | null: false |
-| name     | string | null: false |
-| name_kana| string | null: false |
+| name_sei | string | null: false |
+| name_mei | string | null: false |
+| name_sei_kana| string | null: false |
+| name_mei_kana | string | null: false |
 | mailadress| string | null: false |
-| password | string | null: false |
-| password_check| string | null: false |
-| birth    | string | null: false |
+| encrypted_password | string | null: false |
+| birth    | date | null: false |
 
 ### Association
 
 - has_many :items
-- has_one :adresses
-- has_one :credit_cards
+- 
+- 
 
 ## itemsテーブル
 
@@ -56,7 +57,8 @@ Things you may want to cover:
 
 - belongs_to :users
 - has_one :adresses
-- has_one :credit_cards
+  has_one :purchasing_management
+
 
 ## adresses テーブル
 
@@ -65,26 +67,22 @@ Things you may want to cover:
 | postal_code| integer| null: false |
 | prefecture   | string | null: false |
 | municipality | string | null: false |
-| house_number | integer | null: false |
-| buliding_name| string | null: false |
-| phone_number | integer| null: false |
+| house_number | string | null: false |
+| buliding_name| string |
+| phone_number | string | null: false |
 
 ### Association
-
-- has_one :users
-- has_many :credit_cards
   has_one :items
+  has_one :purchasing_management
 
-## credit_cards テーブル
+## purchasing_management テーブル
 
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| credit_number | integer | null: false |
-| expiration_year | integer | null: false |
-| expiration | integer | null: false |
-| security_code| integer | null: false |
+| Column | Type   | Options     |
+| ------ | ------ | ----------- |
+| user_id | integer | null: false|
+| item_id | integer | null: false|
 
 ### Association
   has_one :users
   has_one :items
-  belongs_to :adresses
+  has_one :adresses
