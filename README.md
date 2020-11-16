@@ -41,7 +41,7 @@ Things you may want to cover:
 ### Association
 
 - has_many :items
-- has_one :purchasing_management
+- has_many :purchasing_managements
 - 
 
 ## itemsテーブル
@@ -51,41 +51,43 @@ Things you may want to cover:
 | name   | string | null: false |
 | detail | text | null: false |
 | price  | integer| null: false |
-| status | string | null: false |
-| fee_burden | boolean | null: false|
-| area | integer | null: false|
-| handling_time | integer | null: false|
-| category | integer | null: false|
+| status_id | integer | null: false |
+| fee_burden_id | integer | null: false|
+| area_id | integer | null: false|
+| handling_time_id | integer | null: false|
+| category_id | integer | null: false|
+| user | references | null: false, foreign_key: true|
 
 
 ### Association
 
-- belong_to :users
-  has_one :purchasing_management
+- belongs_to :user
+  has_many :purchasing_managements
 
 
-## adresses テーブル
+## addresses テーブル
 
 | Column | Type   | Options     |
 | ------ | ------ | ----------- |
 | postal_code| string| null: false |
-| prefecture   | integer | null: false |
+| prefecture_id | integer | null: false |
 | municipality | string | null: false |
 | house_number | string | null: false |
-| buliding_name| string |
+| building_name| string |
 | phone_number | string | null: false |
+| purchasing_management | references | null: false, foreign_key: true|
 
 ### Association
-  has_one :purchasing_management
+  belongs_to :purchasing_management
 
 ## purchasing_management テーブル
 
 | Column | Type   | Options     |
 | ------ | ------ | ----------- |
-| user_id | integer | null: false|
-| item_id | integer | null: false|
+| user | references | null: false, foreign_key: true |
+| item | references | null: false, foreign_ket: true |
 
 ### Association
-  has_one :users
-  has_one :items
-  has_one :adresses
+  belongs_to :users
+  belongs_to :items
+  has_one :addresses
