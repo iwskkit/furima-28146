@@ -34,7 +34,7 @@ Things you may want to cover:
 | name_mei | string | null: false |
 | name_sei_kana| string | null: false |
 | name_mei_kana | string | null: false |
-| mailadress| string | null: false |
+| email | string | null: false |
 | encrypted_password | string | null: false |
 | birth    | date | null: false |
 
@@ -62,7 +62,7 @@ Things you may want to cover:
 ### Association
 
 - belongs_to :user
-  has_many :purchasing_managements
+  has_one :purchasing_management
 
 
 ## addresses テーブル
@@ -88,6 +88,6 @@ Things you may want to cover:
 | item | references | null: false, foreign_ket: true |
 
 ### Association
-  belongs_to :users
-  belongs_to :items
-  has_one :addresses
+  belongs_to :user
+  belongs_to :item
+  has_one :addresse
