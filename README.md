@@ -53,7 +53,7 @@ Things you may want to cover:
 | price  | integer| null: false |
 | status_id | integer | null: false |
 | fee_burden_id | integer | null: false|
-| area_id | integer | null: false|
+| prefecture_id | integer | null: false|
 | handling_time_id | integer | null: false|
 | category_id | integer | null: false|
 | user | references | null: false, foreign_key: true|
@@ -89,5 +89,5 @@ Things you may want to cover:
 
 ### Association
   belongs_to :user
-  has_one :item
+  belongs_to :item
   has_one :addresse
