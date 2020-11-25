@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   kanji = /\A[一-龥]+\z/
 
-  validates :nickname, presence: true, length: { maximum:50 }
+  validates :nickname, presence: true, length: { maximum:40 }
   validates :name_sei, presence: true, format: { with: kanji }
   validates :name_mei, presence: true, format: { with: kanji }
   validates :name_sei_kana, presence: true
