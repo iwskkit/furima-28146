@@ -4,12 +4,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  kanji = /\A[一-龥]+\z/
+  honmyou = /\A[ぁ-んァ-ン一-龥]/
+  katakana = /\A[ァ-ヶー－]+\z/
 
   validates :nickname, presence: true, length: { maximum:40 }
-  validates :name_sei, presence: true, format: { with: kanji }
-  validates :name_mei, presence: true, format: { with: kanji }
-  validates :name_sei_kana, presence: true
-  validates :name_mei_kana, presence: true
+  validates :name_sei, presence: true, format: { with: honmyou }
+  validates :name_mei, presence: true, format: { with: honmyou }
+  validates :name_sei_kana, presence: true { with: katakana }
+  validates :name_mei_kana, presence: true { with: katakana }
   validates :birth, presence: true
 end
