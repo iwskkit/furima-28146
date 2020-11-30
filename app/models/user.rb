@@ -8,12 +8,13 @@ class User < ApplicationRecord
   katakana = /\A[ァ-ヶー－]+\z/
   eisuuzi = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i
 
-  validates :nickname, presence: true, length: { maximum:40 }
-  validates :name_sei, presence: true, format: { with: honmyou }
-  validates :name_mei, presence: true, format: { with: honmyou }
-  validates :name_sei_kana, presence: true, format: { with: katakana }
-  validates :name_mei_kana, presence: true, format: { with: katakana }
-  validates :password, presence: true, format: { with: eisuuzi }
-  validates :birth, presence: true
-  
+  with_options presence: true do
+   validates :nickname, length: { maximum:40 }
+   validates :name_sei, format: { with: honmyou }
+   validates :name_mei, format: { with: honmyou }
+   validates :name_sei_kana, format: { with: katakana }
+   validates :name_mei_kana, format: { with: katakana }
+   validates :password, format: { with: eisuuzi }
+   validates :birth
+  end
 end
