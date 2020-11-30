@@ -69,7 +69,7 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Name sei is invalid")
       end
-      it "name_seiがアルファベットだと登録できない" do
+      it "name_seiがカタカナ以外だと登録できない" do
         @user.name_sei = "A"
         @user.valid?
         expect(@user.errors.full_messages).to include("Name sei is invalid")
@@ -79,7 +79,7 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Name mei is invalid")
       end
-      it "name_meiがアルファベットだと登録できない" do
+      it "name_meiがカタカナ以外だと登録できない" do
         @user.name_mei = "aaa"
         @user.valid?
         expect(@user.errors.full_messages).to include("Name mei is invalid")
