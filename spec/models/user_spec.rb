@@ -6,7 +6,7 @@ describe User do
 
   describe 'ユーザー新規登録' do
     context '新規登録がうまくいくとき' do
-      it "nickname、name_sei,name_mei,name_sei_kana,name_mei_kana,email、password,password_confirmation,birthが存在すれば登録できる" do
+      it "nickname,name sei,name mei,name sei kana,name mei kana,email,password,birthが存在すれば登録できる" do
         expect(@user).to be_valid
       end
     end
@@ -48,6 +48,21 @@ describe User do
         @user.password = "00000"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+      end
+      it "passwordは半角数字のみでは登録できない" do
+        @user.password = "20202020"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+      it "passwordは半角英語のみでは登録できない" do
+        @user.password = "aaaaaaaaaa"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+      it "passwordは全角では登録できない" do
+        @user.password = "あああああああああ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
       end
       it "name_seiが空だと登録できない" do
         @user.name_sei = ""
