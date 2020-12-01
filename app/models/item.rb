@@ -13,6 +13,11 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :handling_time_id
     validates :category_id
+    validates :content, presence: true, unless: :was_attached?
+  end
+
+  def was_attached?
+    self.image.attached?
   end
 
 end
