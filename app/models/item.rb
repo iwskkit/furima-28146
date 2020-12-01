@@ -1,5 +1,7 @@
 class Item < ApplicationRecord
 
+  has_one_attached :image
+
   suuzi = /\A[0-9]+\z/
 
   with_options presence: true do
