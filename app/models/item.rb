@@ -15,12 +15,20 @@ class Item < ApplicationRecord
     validates :name
     validates :detail
     validates :price, formet: { with: suuzi, message: "半角数字でないと登録できません" }, numericality: { greater_than_or_equal_to: 300, less_than: 9999999 }
-    validates :statu_id, numericality: { other_than: 1 }
-    validates :fee_burden_id, numericality: { other_than: 1 }
-    validates :prefecture_id, numericality: { other_than: 1 }
-    validates :handling_time_id, numericality: { other_than: 1 }
-    validates :category_id, numericality: { other_than: 1 }
+    validates :statu_id
+    validates :fee_burden_id
+    validates :prefecture_id
+    validates :handling_time_id
+    validates :category_id
     validates :content, presence: true, unless: :was_attached?
+  end
+
+  with_options numericality: { other_than: 1 } do
+    validates :statu_id
+    validates :fee_burden_id
+    validates :prefecture_id
+    validates :handling_time_id
+    validates :category_id
   end
 
   def was_attached?
