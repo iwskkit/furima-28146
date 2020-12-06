@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :items
+
   honmyou = /\A[ぁ-んァ-ン一-龥]/
   katakana = /\A[ァ-ヶー－]+\z/
   eisuuzi = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i
