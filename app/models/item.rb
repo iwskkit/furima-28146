@@ -20,6 +20,7 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :handling_time_id
     validates :category_id
+    validates :image
   end
 
   with_options numericality: { other_than: 1 } do
