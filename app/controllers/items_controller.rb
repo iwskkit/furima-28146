@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update]
   def index
     @items = Item.order("created_at DESC")
   end
@@ -18,12 +19,28 @@ class ItemsController < ApplicationController
   end
 
   def show
-      @item = Item.find(params[:id])
+  end
+
+  def edit
+    if current_user.id != @item.user_id 
+      redirect_to root_path
+    end
+  end
+
+  def update
+     @item.update(item_params) if current_user.id == @item.user_id
+      return redirect_to item_path if @item.valid?
+      # 商品の更新ができなかった場合に
+      render :edit
   end
 
   private
   def item_params
     params.require(:item).permit(:content, :image, :name, :detail, :price, :category_id, :status_id, :handling_time_id, :prefecture_id, :fee_burden_id).merge(user_id: current_user.id)
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
   end
 
 end
