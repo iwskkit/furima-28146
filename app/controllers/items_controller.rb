@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
   def index
     @items = Item.order("created_at DESC")
   end
@@ -32,6 +32,11 @@ class ItemsController < ApplicationController
       return redirect_to item_path if @item.valid?
       # 商品の更新ができなかった場合に
       render :edit
+  end
+
+  def destroy
+    @item.destroy
+    redirect_to root_path
   end
 
   private
