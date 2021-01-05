@@ -9,7 +9,6 @@ class Address < ApplicationRecord
     validates :prefecture_id, numericality: { other_than: 1 }
     validates :municipality
     validates :house_number
-    validates :building_name
     validates :phone_number, format: { with: denwa }, length: { maximum:11 }
     validates :purchasing_management_id
   end
