@@ -10,7 +10,7 @@ class PurchasingManagementsController < ApplicationController
       if @user_furima.valid?
         pay_item
         @user_furima.save
-        redirect_to action: :show
+        redirect_to root_path
       else
         render action: :index
       end
@@ -24,8 +24,9 @@ class PurchasingManagementsController < ApplicationController
 
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # 自身のPAY.JPテスト秘密鍵を記述しましょう
+    @item = Item.find(params[:item_id])
     Payjp::Charge.create(
-      amount: params[:price],  # 商品の値段
+      amount: @item.price,  # 商品の値段
       card: furima_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
