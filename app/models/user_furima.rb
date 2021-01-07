@@ -1,6 +1,6 @@
 class UserFurima
   include ActiveModel::Model
-  attr_accessor :postal_code, :prefecture_id, :municipality, :house_number, :building_name, :phone_number, :user_id, :item_id
+  attr_accessor :postal_code, :prefecture_id, :municipality, :house_number, :building_name, :phone_number, :user_id, :item_id, :token, :purchasing_management_id
 
   with_options presence: true do
     validates :user_id
@@ -10,8 +10,9 @@ class UserFurima
     validates :municipality
     validates :house_number
     validates :building_name
-    validates :phone_number, format: { with: denwa }, length: { maximum:11 }
+    validates :phone_number, format: { with: /\A[0-9]+\z/ }, length: { maximum:11 }
     validates :purchasing_management_id
+    validates :token
   end
 
   def save
