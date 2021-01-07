@@ -1,4 +1,7 @@
 class PurchasingManagementsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :move_to_index
+
   def index
     @user_furima = UserFurima.new
     @item = Item.find(params[:item_id])
@@ -30,6 +33,13 @@ class PurchasingManagementsController < ApplicationController
       card: furima_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
+  end
+
+  def move_to_index
+    @item = Item.find(params[:item_id])
+    unless @item.user_id != current_user.id
+      redirect_to root_path
+    end
   end
 end
 
