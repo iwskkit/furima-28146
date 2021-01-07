@@ -1,5 +1,8 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+
+  has_one :purchasing_management
+
   belongs_to_active_hash :user
   belongs_to_active_hash  :category
   belongs_to_active_hash  :fee_burden
