@@ -1,14 +1,12 @@
 class PurchasingManagementsController < ApplicationController
   before_action :authenticate_user!
   before_action :move_to_index
-
+  before_action :set_item, only: [:index, :create, :pay_item, :move_to_index]
   def index
     @user_furima = UserFurima.new
-    @item = Item.find(params[:item_id])
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @user_furima = UserFurima.new(furima_params)
       if @user_furima.valid?
         pay_item
@@ -27,7 +25,6 @@ class PurchasingManagementsController < ApplicationController
 
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # 自身のPAY.JPテスト秘密鍵を記述しましょう
-    @item = Item.find(params[:item_id])
     Payjp::Charge.create(
       amount: @item.price,  # 商品の値段
       card: furima_params[:token],    # カードトークン
@@ -36,10 +33,13 @@ class PurchasingManagementsController < ApplicationController
   end
 
   def move_to_index
-    @item = Item.find(params[:item_id])
     if @item.user_id == current_user.id || @item.purchasing_management != nil
       return redirect_to root_path
     end
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 end
 
