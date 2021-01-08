@@ -37,8 +37,8 @@ class PurchasingManagementsController < ApplicationController
 
   def move_to_index
     @item = Item.find(params[:item_id])
-    unless @item.user_id != current_user.id
-      redirect_to root_path
+    if @item.user_id == current_user.id || @item.purchasing_management != nil
+      return redirect_to root_path
     end
   end
 end
