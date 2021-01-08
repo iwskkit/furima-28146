@@ -1,5 +1,8 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+
+  has_one :purchasing_management
+
   belongs_to_active_hash :user
   belongs_to_active_hash  :category
   belongs_to_active_hash  :fee_burden
@@ -21,6 +24,7 @@ class Item < ApplicationRecord
     validates :handling_time_id
     validates :category_id
     validates :image
+    validates :user_id
   end
 
   with_options numericality: { other_than: 1 } do
