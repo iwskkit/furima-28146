@@ -1,7 +1,9 @@
 require 'rails_helper'
 describe UserFurima do
   before do
-    @user_furima = FactoryBot.build(:user_furima)
+    @user = FactoryBot.build(:user)
+    @item = FactoryBot.build(:item)
+    @user_furima = FactoryBot.build(:user_furima, user_id: @user, item_id: @item)
   end
 
   describe '購入' do

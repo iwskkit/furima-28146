@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :items
-  has_many :users
+  has_many :purchasing_managements
 
   honmyou = /\A[ぁ-んァ-ン一-龥]/
   katakana = /\A[ァ-ヶー－]+\z/
