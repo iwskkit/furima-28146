@@ -6,7 +6,7 @@ describe UserFurima do
 
   describe '購入' do
     context '購入がうまくいくとき' do
-      it "postal_code,municipality,prefecture_id,house_number,phone_numbe,user_id,item_idrが存在すれば登録できる" do
+      it "postal_code,municipality,prefecture_id,house_number,phone_numbe,user_id,item_id,tokenが存在すれば登録できる" do
         expect(@user_furima).to be_valid
       end
     end
@@ -71,6 +71,11 @@ describe UserFurima do
         @user_furima.item_id = ""
         @user_furima.valid?
         expect(@user_furima.errors.full_messages).to include("Item can't be blank")
+      end
+      it "tokenが空だと登録できない" do
+        @user_furima.token = ""
+        @user_furima.valid?
+        expect(@user_furima.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
