@@ -11,6 +11,9 @@ describe UserFurima do
       it "postal_code,municipality,prefecture_id,house_number,phone_numbe,user_id,item_id,tokenが存在すれば登録できる" do
         expect(@user_furima).to be_valid
       end
+      it "building_nameが存在しなくても登録できる" do
+        expect(@user_furima).to be_valid
+      end
     end
 
     context '購入がうまくいかないとき' do
